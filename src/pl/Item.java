@@ -8,12 +8,24 @@ public class Item implements Comparable<Item> {
 	private double price;
 	
 	/***
-	 * Public constructor for item class 
+	 * Public default constructor for item class 
 	 */
 	public Item(){
-		
-		
+		itemname="";
+		categorydetail ="";
+		price = 0.0;
+				
 	}
+	
+	/***
+	 * Public overloaded constructor for item class 
+	 */
+	public Item(String itemname, String categorydetail, double price){
+		this.itemname=itemname;
+		this.categorydetail =categorydetail;
+		this.price = price;
+	}
+
 	
 	/***
 	 * public method to get the price of item
@@ -63,10 +75,30 @@ public class Item implements Comparable<Item> {
 		this.itemname = itemname;
 	}
 
+	/***
+	 * implementing compare to function.
+	 */
 	@Override
 	public int compareTo(Item item) {
 		// TODO Auto-generated method stub
         return itemname.compareToIgnoreCase(item.itemname);
+	}
+
+	/***
+	 * Public method to set item data 
+	 */
+	public void SetItemData(String itemname, String categorydetail, double price){
+		this.itemname=itemname;
+		this.categorydetail =categorydetail;
+		this.price = price;
+	}
+
+	/***
+	 * public method to get the detail of item
+	 * @return String
+	 */
+	public String getItemDetail(){
+		return itemname + "    " + categorydetail + "    " + String.format("%.1f", price);
 	}
 	
 }
