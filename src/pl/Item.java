@@ -8,7 +8,7 @@ public class Item implements Comparable<Item> {
 	private double price;
 	
 	/***
-	 * Public default constructor for item class 
+	 * Public default constructor for Item class 
 	 */
 	public Item(){
 		itemname="";
@@ -80,7 +80,6 @@ public class Item implements Comparable<Item> {
 	 */
 	@Override
 	public int compareTo(Item item) {
-		// TODO Auto-generated method stub
         return itemname.compareToIgnoreCase(item.itemname);
 	}
 
