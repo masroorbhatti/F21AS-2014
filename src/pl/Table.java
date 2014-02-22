@@ -31,7 +31,7 @@ public class Table {
 	/**
 	 * @param tableno the tableno to set
 	 */
-	private void setTableno(int tableno) {
+	public void setTableno(int tableno) {
 		this.tableno = tableno;
 	}
 
