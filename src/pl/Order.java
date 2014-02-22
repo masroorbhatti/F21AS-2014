@@ -97,4 +97,14 @@ public class Order implements Comparable<Order> {
 		
         return retval;
 	}
+	
+	/**
+	 * Public method to return price of order
+	 * @return double value for order price
+	 */
+	public double getOrderPrice(){
+		double orderprice=0.0;
+		orderprice = item.getPrice() * qty;
+		return orderprice;
+	}
 }

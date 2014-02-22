@@ -1,5 +1,6 @@
 package pl;
 
+import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -8,6 +9,7 @@ public class Table {
 	private boolean isReserved;
 	private Set<Order> orders ;
 	private double discount;
+	private Iterator<Order> orderIterator;
 
 	/**
 	 *  Public default constructor for Table class
@@ -87,4 +89,38 @@ public class Table {
 			isReserved=true;
 	}
 	
+	/**
+	 * Public method to return total ordered for current table
+	 * @return int value for total orders
+	 */
+	public int getTotalOrders(){
+		return (orders.size());
+		
+	}
+	
+	/**
+	 *  Public method to return total generated bill for table
+	 * @return double value  for bill amount
+	 */
+	public double getTotalBill(){
+		double billamount = 0.0;
+		orderIterator = orders.iterator();
+		while (orderIterator.hasNext()){
+			billamount += orderIterator.next().getOrderPrice();
+		}
+		return billamount;
+	}
+
+	/**
+	 *  Public method to return total bill payable (after discount)
+	 * @return double value  for bill amount payable
+	 */
+	
+	public double getTotalBillPayable(){
+		double billamount = 0.0;
+		billamount = getTotalBill();
+		billamount-=getDiscount();
+		return billamount;
+	}
+
 }
