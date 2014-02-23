@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import pl.Item;
 import pl.Order;
+import pl.Global;
 
 import io.IOClass;
 public class Manager {
@@ -22,9 +23,12 @@ public class Manager {
 		
 		IOClass io = new IOClass();
 		io.inputFromFile("MenuData.csv", "menu");
+		Global.itemlistgl = io.getItemList();
 		io.inputFromFile("TableData.csv", "order");
 		this.itemList = io.getItemList();
+		
 		this.orderList = io.getOrderList();
+		Global.orderlistgl = io.getOrderList();
 	
 	}
 

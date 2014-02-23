@@ -1,7 +1,9 @@
 package io;
+import pl.Allitems;
 import pl.Order;
 import pl.Item;
 import pl.Table;
+
 
 
 import java.io.File;
@@ -67,8 +69,10 @@ public class IOClass {
 			
 			Table tb = new Table();
 			tb.setTableno(tableno);
+			Allitems ai = new Allitems();
+			ai.getItemFromName(itemname);
+			Item it = ai.getSelectedItem();
 			
-			Item it = new Item(itemname, " " ,0.0);
 			Order or = new Order(tb,it,quantity);
 			this.addOrder(or);
 		}

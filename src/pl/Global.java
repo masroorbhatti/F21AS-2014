@@ -1,5 +1,7 @@
 package pl;
 
+import java.util.ArrayList;
+
 public class Global {
 	
 	/**
@@ -7,6 +9,8 @@ public class Global {
 	 */
 	public static int tableno;
 	public static int orderno;
+	public static ArrayList<Item> itemlistgl;
+	public static ArrayList<Order> orderlistgl;
 
 	/**
 	 * static method to return last table no

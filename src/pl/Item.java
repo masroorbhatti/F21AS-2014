@@ -97,7 +97,9 @@ public class Item implements Comparable<Item> {
 	 * @return String
 	 */
 	public String getItemDetail(){
-		return itemname + "    " + categorydetail + "    " + String.format("%.1f", price);
+		return itemname + "				" + categorydetail + "    " + String.format("%.1f", price);
 	}
 	
+	
+
 }
