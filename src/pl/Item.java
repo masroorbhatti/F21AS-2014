@@ -80,7 +80,13 @@ public class Item implements Comparable<Item> {
 	 */
 	@Override
 	public int compareTo(Item item) {
-        return itemname.compareToIgnoreCase(item.itemname);
+		int retval = itemname.compareToIgnoreCase(item.itemname);
+		if (retval > 0 ) retval = 1;
+		else if (retval < 0) retval = -1;
+		else retval=0;
+			
+		
+		return retval;
 	}
 
 	/***
