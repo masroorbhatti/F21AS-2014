@@ -1,5 +1,7 @@
 package io;
+import pl.AllTables;
 import pl.Allitems;
+import pl.Global;
 import pl.Order;
 import pl.Item;
 import pl.Table;
@@ -17,6 +19,7 @@ public class IOClass {
 
 	private ArrayList<Order> orderList;
 	private ArrayList<Item> itemList;
+	private ArrayList<Table> tableList;
 
 	/**
 	 * Constructor initializing orderlist and itemlist
@@ -24,6 +27,8 @@ public class IOClass {
 	public IOClass(){
 		orderList = new ArrayList<Order>();
 		itemList = new ArrayList<Item>();
+		tableList = new ArrayList<Table>();
+
 	}
 	
 	/**
@@ -67,14 +72,15 @@ public class IOClass {
 			String itemname = parts[2];
 			int quantity = Integer.parseInt(parts[3]);
 			
-			Table tb = new Table();
-			tb.setTableno(tableno);
 			Allitems ai = new Allitems();
-			ai.getItemFromName(itemname);
-			Item it = ai.getSelectedItem();
 			
-			Order or = new Order(tb,it,quantity);
+			Table tmptable = Global.resttables.getTable(tableno);
+			tmptable.setDiscount(3.0);
+			tmptable.setReserved(true);
+			tmptable.addOrder(new Order(tmptable, ai.getItemFromName(itemname),quantity ));
+			Order or = new Order(tmptable,ai.getItemFromName(itemname),quantity);
 			this.addOrder(or);
+			
 		}
 	
 		//this catches trying to convert a String to an integer
@@ -138,6 +144,14 @@ public class IOClass {
 	public void addItem( Item it){
 		itemList.add(it);	
 	}
+	
+	/**
+	 * Method used to add item object into an Arraylist name as itemList 
+	 * @param it
+	 */
+	public void addTable( Table tb){
+		tableList.add(tb);	
+	}
 
 	/**
 	 * Method used to return itemlist
@@ -153,6 +167,13 @@ public class IOClass {
 	 */
 	public ArrayList<Order> getOrderList(){
 		return this.orderList;
+	}
+	/**
+	 * Method used to return tableList
+	 * @return
+	 */
+	public ArrayList<Table> getTableList(){
+		return this.tableList;
 	}
 
 

@@ -102,8 +102,45 @@ public class AllTables {
 		if (tmptableno != 0)
 			rettable = alltables.get(tmptableno);
 		
+		
 		return rettable;
 	}
+	
+	/**
+	 * Method to get report of table with most orders
+	 * @return String report
+	 */
+	public String getReportOfTableWithMostOrders(){
+		Table tb = this.getTableWithMostOrders();
+		String report = "Details of Table With Most Orders is as follows : \n\n";
+		
+		report += tb.getOrderdItemDetails();
+		return report;
+		
+	}
+	
+	/**
+	 * Public method to get table object with highest number of orders
+	 * @return Table class object
+	 */
+	public String getOccupiedTableRecords(){
+		String report = "";
+		 tablesIterator = alltables.keySet().iterator();	// Iterator to iterate map
+		 Integer tableno;
+		 Table tmptable;
+		 int tmporderqty=0;				//maintaining max orders to used in comparison 
+		 int tmptableno=0;				//maintaining table no of highest orders  
+		while (tablesIterator.hasNext()){
+			tableno = tablesIterator.next();
+			tmptable = alltables.get(tableno);	
+			if (tmptable.isReserved() == true){
+				report += tmptable.getOrderdItemDetails();
+			}
+		}
+		
+		return report;
+	}
+	
 	
 	/**
 	 * Public method to get table object with highest bill
@@ -126,6 +163,19 @@ public class AllTables {
 			rettable = alltables.get(tmptableno);
 		
 		return rettable;
+	}
+	
+	/**
+	 * Public method to get report of table with highest bill
+	 * @return String report
+	 */
+	public String getReportOfTableWithHighestBill(){
+		Table tb = this.getTableWithHighestBill();
+		String report = "Details of Table With Highest Bill is as follows : \n\n";
+		
+		report += tb.getOrderdItemDetails();
+		return report;
+		
 	}
 	
 	/**
@@ -155,5 +205,15 @@ public class AllTables {
 	public int getTotalNumberOfTables(){	
 	
 		return (alltables.size());		 // same Global.tableno;
+	}
+	
+	/**
+	 * Public method to search table based on  table no
+	 * @param tableno 
+	 * @return Table object
+	 */
+	public Table getTable(int tableno){
+		
+		return (alltables.get(tableno));
 	}
 }

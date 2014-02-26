@@ -80,8 +80,35 @@ public class AllOrders {
 		}
 		report += "Item Name                   Order Count\n\n";
 		for (Entry<String, Integer> entry : maxorders.entrySet()) {
-		     report += entry.getKey() + "                   " +entry.getValue() + "\n";
+			 report += String.format("%-33s",entry.getKey());
+			 report += String.format("%-15s",entry.getValue());
+		     report += "\n";
 		}
+
+		return report;
+	}
+	public String getCostOfOrderForEachTable(int tbno){
+		String report="";
+		int count=0;
+		double totalbill = 0.0;
+		ordersIterator = allorders.keySet().iterator();
+		while (ordersIterator.hasNext()){
+			Integer orderno = ordersIterator.next();
+			if(allorders.get(orderno).getTable().getTableno() == tbno){
+			if(count == 0){
+				report += ("-------------------------------Table No "+ allorders.get(orderno).getTable().getTableno() + " --------------------------\n");
+				count = 1;
+			}
+			
+			report += String.format("%20s",allorders.get(orderno).getItem().getItemName()+"");
+			report += String.format("%20s",allorders.get(orderno).getQty()+ "  *   " + allorders.get(orderno).getItem().getPrice() +"  =  ");
+			report += String.format("%20s",allorders.get(orderno).getOrderPrice());
+			totalbill += allorders.get(orderno).getOrderPrice();
+			report += ("\n");
+			}
+		}
+		
+		
 
 		return report;
 	}

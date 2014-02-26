@@ -11,6 +11,8 @@ public class Global {
 	public static int orderno;
 	public static ArrayList<Item> itemlistgl;
 	public static ArrayList<Order> orderlistgl;
+	public static ArrayList<Table> tablellistgl;
+	public static AllTables resttables = new AllTables();
 
 	/**
 	 * static method to return last table no

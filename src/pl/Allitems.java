@@ -1,7 +1,10 @@
 package pl;
+import java.awt.List;
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.Iterator;
 
@@ -11,7 +14,6 @@ public class Allitems  {
 	private TreeSet <Item> allitems;    	// TreeSet for storing allitems
 	Iterator<Item> itemsIterator;			//Iterator used to iterator through the treeset 
 	private Item selectedItem;
-
 	private HashSet<String> unorderditems;	// HashSet Storing value of unordered items
 	private HashSet<String> orderditems;	// HashSet Storing value of ordered Items
 	/***
@@ -30,19 +32,81 @@ public class Allitems  {
 	 * 	Method to getItemList			
 	 * @return
 	 */
-	public String getitemslist(){
+	public String getItemListByCategory(String category){
 
 		String report="";	
-		report += ("----------------------------MAIN MENU--------------------------");
+	//	report += ("----------------------------MAIN MENU--------------------------");
+		
+		report += String.format("%-19s",category + "\n");
+		for(Item it : allitems){
+			if(category.equals(it.getCategory())){
+				report += System.lineSeparator();
+				report += String.format("%-5s"," ");
+				report += String.format("%-19s",it.getItemName());
+				report += String.format("%-19s",it.getPrice());
+			}
+		}
+	
+		report += "\n\n";
+		return report;
+
+	}
+	/***
+	 * 	Method to getItemList			
+	 * @return
+	 */
+	public String getAllItemListAccToCat(){
+
+		String[] categorylist = this.getCategoryList();
+		String report="";	
+		report += ("----------------------------MAIN MENU--------------------------\n\n");
+		for(int i=0;i<categorylist.length;i++){
+			report += this.getItemListByCategory(categorylist[i]);
+		}
+		report += "\n\n";
+		return report;
+
+	}
+	
+	/***
+	 * 	Method to getItemList			
+	 * @return
+	 */
+	public String[] getCategoryList(){
+
+		String[] categorylist = new String[20];
+	
+		String report="";	
+		int count=0;
+		int repeat = 0;
+		report += ("---------------------------- MENU --------------------------");
 		while(itemsIterator.hasNext()){
 			Item o1 =  (Item) ((Iterator<Item>) itemsIterator).next();
-			report += System.lineSeparator();
-			report += String.format("%19s",o1.getItemName());
-			report += String.format("%19s",o1.getCategory());
-			report += String.format("%19s",o1.getPrice());
-
+				for(int i=0;i<categorylist.length;i++){
+					if(categorylist[i] != null)
+					{
+						if(categorylist[i].equals(o1.getCategory())){
+							repeat = 1;
+						}
+					}
+				}
+				if(repeat == 0){
+					categorylist[count] = o1.getCategory();
+					count++;
+				}else{
+					repeat = 0;
+				}
 		}
-		return report;
+		ArrayList<String> list = new ArrayList<String>();
+
+	    for(String s : categorylist) {
+	       if(s != null && s.length() > 0) {
+	          list.add(s);
+	       }
+	    }
+
+	    categorylist = list.toArray(new String[list.size()]);
+		return categorylist;
 
 	}
 	/***
@@ -67,33 +131,23 @@ public class Allitems  {
 	 * public Method to fetch item by itemname
 	 * @return
 	 */
-	public Boolean getItemFromName(String itemname){
-
+	public Item getItemFromName(String itemname){
+		Item retitem = null;
 		for(Item it : allitems){
 			if(it.getItemName().equals(itemname)){
-				this.selectedItem = it;
-				return true;
+				retitem=it;
+
 			}
 		}
-		return false;
+		return retitem;
 
 	}
 
-	/***
-	 * 		public method to return seleceteditem from the items category
-	 * @return
-	 */
-	public Item getSelectedItem()
-	{
-		return this.selectedItem;
-	}
 	/***
 	 * 	public method to return ordered items
 	 * @return
 	 */
-	public String getOrderedItemList(){
-		String report="";
-		report +=("------Ordered Items---------\n");
+	public void setOrderedItemList(){
 		orderditems = new HashSet<String>();
 		for(Item it : Global.itemlistgl){
 			for(Order or : Global.orderlistgl){
@@ -106,6 +160,12 @@ public class Allitems  {
 
 			}
 		}
+		
+	}
+	public String getOrderedItemList(){
+		String report = "";
+		report +=("------Ordered Items---------\n");
+		
 		for(String vl : orderditems){
 			report +=(vl + "\n");
 
@@ -120,8 +180,9 @@ public class Allitems  {
 	 */
 	public String getUnorderedItemList(){
 		String report="";
-		report +=("------UnOrdered Items---------\n");
+		report +=("------DISHES NOT ORDERED---------\n\n");
 		unorderditems = new HashSet<String>();
+		this.setOrderedItemList();
 		for(Item it : Global.itemlistgl){
 			if(!orderditems.contains(it.getItemName())){
 				unorderditems.add(it.getItemName());
@@ -134,5 +195,6 @@ public class Allitems  {
 		return report;
 
 	}
+
 
 }

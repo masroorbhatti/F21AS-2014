@@ -1,5 +1,6 @@
 package pl;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
@@ -106,10 +107,44 @@ public class Table {
 		double billamount = 0.0;
 		orderIterator = orders.iterator();
 		while (orderIterator.hasNext()){
+			
 			billamount += orderIterator.next().getOrderPrice();
+			
 		}
 		return billamount;
 	}
+	/**
+	 *  Public method to return Orders For Current Table
+	 * @return double value  for bill amount
+	 */
+	public String getOrderdItemDetails(){
+		String report = "";
+		report += "----------------- Table Summary ----------------- \n\n";
+		report += "Table "+this.getTableno()+"\n";
+		report += "-------\n";
+		for(Order or : orders){
+			report += String.format("%-25s",or.getItem().getItemName() +"");
+			report += String.format("%-5s",or.getQty());
+			report += String.format("%-5s","  *   ");
+			report += String.format("%-5s",or.getItem().getPrice());
+			report += String.format("%-5s","  =  ");
+			report += String.format("%-1s",or.getOrderPrice());
+			report += "\n";
+
+		}
+		report += String.format("%-46s","");
+		report += "-----\n";
+		report += String.format("%-46s","Total For This Table");
+		report += String.format("%-1s",this.getTotalBill() + "\n");
+		report += String.format("%-46s","Discount");
+		report += String.format("%-1s",this.getDiscount() + "\n");
+		report += String.format("%-46s","Discounted Total");
+		report += String.format("%-1s",this.getTotalBill() - this.getDiscount() + "\n");
+		
+		
+		return report;
+	}
+
 
 	/**
 	 *  Public method to return total bill payable (after discount)
