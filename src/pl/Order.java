@@ -107,5 +107,25 @@ public class Order implements Comparable<Order> {
 		orderprice = item.getPrice() * qty;
 		return orderprice;
 	}
+	
+	/**
+	 * Public method to return price of order
+	 * @return double value for order price
+	 */
+	public double getOrderPriceWithDiscount(){
+		double orderprice=0.0;
+		orderprice = item.geDiscountedtPrice() * qty;
+		return orderprice;
+	}
+	
+	/**
+	 * method to return the discount on current order
+	 * @return double value for discount
+	 */
+	public double getOrderDiscount(){
+		double ordprice = getOrderPrice();
+		double orddiscount = ordprice * Global.discountlistgl.get(this.item.getCategory()) / 100;
+		return orddiscount;	
+		}
 
 }

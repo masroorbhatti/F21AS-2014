@@ -49,6 +49,8 @@ public class IOClass {
 				if (inputLine.length() != 0) {//ignored if blank line
 					if(filetype == "order")
 						processOrder(inputLine);
+					else if(filetype == "discount")
+						processDiscount(inputLine);
 					else
 						processMenu(inputLine);
 				}
@@ -73,7 +75,6 @@ public class IOClass {
 			int tableno = Integer.parseInt(parts[0]);
 			String itemname = parts[1];
 			int quantity = Integer.parseInt(parts[2]);
-			double discount = Double.parseDouble(parts[3]);
 
 			//Searching if item exist in menu file
 			ArrayList<Item> al = Global.itemlistgl;
@@ -86,7 +87,7 @@ public class IOClass {
 			Allitems ai = new Allitems();
 			
 			Table tmptable = Global.resttables.getTable(tableno);
-			tmptable.setDiscount(discount);
+			//tmptable.setDiscount(discount);
 			tmptable.setReserved(true);
 			
 			if(!(itemname.isEmpty()) && itemexist != 0){
@@ -138,8 +139,7 @@ public class IOClass {
 
 		}
 		
-		
-		
+
 		//this catches trying to convert a String to an integer
 		catch (NumberFormatException nfe) {
 			String error = "Number conversion error in '"
@@ -155,6 +155,35 @@ public class IOClass {
 		}
 
 	}
+	
+	/**
+	 * Method used to prcoess each line from MenuData file
+	 * @param line
+	 */
+	private void processDiscount(String line) {
+		try {
+			String parts [] = line.split(",");
+			String itemcategory = parts[0];
+			double discount = Double.parseDouble(parts[1]);
+			if(discount > 100){
+				System.out.println("Discount Cannot be greater then 100%");
+			}
+			else
+				Global.discountlistgl.put(itemcategory, discount);	
+
+		}
+		
+
+		//this catches trying to convert a String to an integer
+		catch (NumberFormatException nfe) {
+			String error = "Number conversion error in '"
+					+ line + "'  - " + nfe.getMessage();
+			System.out.println(error);
+		}
+	
+
+	}
+	
 	/**
 	 * Method used to write report to a file named as Output.txt
 	 * @param report

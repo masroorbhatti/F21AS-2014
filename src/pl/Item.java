@@ -36,6 +36,17 @@ public class Item implements Comparable<Item> {
 	}
 	
 	/***
+	 * public method to get the discounted price of item
+	 * @return double value of price
+	 */
+	public double geDiscountedtPrice(){
+		double discount = Global.discountlistgl.get(this.getCategory());
+		double result = (double) (this.getPrice() * discount ) / 100;
+		result = this.getPrice() - result;
+		return result;
+	}
+	
+	/***
 	 * public method to set price
 	 * @param price
 	 */

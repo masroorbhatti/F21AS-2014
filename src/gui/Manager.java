@@ -28,6 +28,9 @@ public class Manager {
 		//getting item details from menu file
 		io.inputFromFile("MenuData.csv", "menu");
 		Global.itemlistgl = io.getItemList();
+		
+		io.inputFromFile("Discount.csv", "discount");
+		
 		//getting order details from table data file
 		io.inputFromFile("TableData.csv", "order");
 		Global.orderlistgl = io.getOrderList();

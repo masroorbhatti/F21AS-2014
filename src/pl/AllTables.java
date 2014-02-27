@@ -113,9 +113,9 @@ public class AllTables {
 	 */
 	public String getReportOfTableWithMostOrders(){
 		Table tb = this.getTableWithMostOrders();
-		String report = "========_Details of Table With Most Orders_=========\n\n";
+		String report = "===============_Details of Table With Most Orders_============\n\n";
 		report += tb.getOrderdItemDetails();
-		report += "\n=======================_END_========================\n\n\n\n";
+		report += "\n=============================_END_============================\n\n\n\n";
 		return report;
 		
 	}
@@ -131,7 +131,7 @@ public class AllTables {
 		 Table tmptable;
 		 int tmporderqty=0;				//maintaining max orders to used in comparison 
 		 int tmptableno=0;				//maintaining table no of highest orders  
-		 report += "==========_Cost Of ALL Order For Table Used_============\n\n";
+		 report += "===============_Cost Of ALL Order For Table Used_================\n\n";
 		while (tablesIterator.hasNext()){
 			tableno = tablesIterator.next();
 			tmptable = alltables.get(tableno);	
@@ -139,7 +139,7 @@ public class AllTables {
 				report += tmptable.getOrderdItemDetails();
 			}
 		}
-		report += "=========================_END_============================\n\n\n\n";
+		report += "==============================_END_================================\n\n\n\n";
 		return report;
 	}
 	
@@ -173,9 +173,9 @@ public class AllTables {
 	 */
 	public String getReportOfTableWithHighestBill(){
 		Table tb = this.getTableWithHighestBill();
-		String report = "=======_Details of Table With Highest Bill_======== \n\n";
+		String report = "==============_Details of Table With Highest Bill_============ \n\n";
 		report += tb.getOrderdItemDetails();
-		report += "\n=======================_END_======================= \n\n\n\n";
+		report += "\n==============================_END_===========================\n\n\n\n";
 
 		return report;
 		

@@ -50,69 +50,69 @@ Coffee and Mints
 
 
 
-==========_Cost Of ALL Order For Table Used_============
+===============_Cost Of ALL Order For Table Used_================
 
 Table 1(Occupied)
 -------
-Smoked Salmon            1      *   6.0    =  6.0
-Carrot Soup              1      *   3.5    =  3.5
-Roast Beef               2      *   10.0   =  20.0
-                                              -----
-Total For This Table                          29.5
-Discount                                      2.0
-Discounted Total                              27.5
+Smoked Salmon            1      *   6.0(20.0%)       =  4.8
+Carrot Soup              1      *   3.5(20.0%)       =  2.8
+Roast Beef               2      *   10.0(10.0%)      =  18.0
+                                                        -----
+Total For This Table                                    29.5
+Discount                                                3.9
+Discounted Total                                        25.6
 
 Table 2(Occupied)
 -------
-Carrot Soup              2      *   3.5    =  7.0
-Roast Beef               2      *   10.0   =  20.0
-                                              -----
-Total For This Table                          27.0
-Discount                                      4.0
-Discounted Total                              23.0
+Carrot Soup              2      *   3.5(20.0%)       =  5.6
+Roast Beef               2      *   10.0(10.0%)      =  18.0
+                                                        -----
+Total For This Table                                    27.0
+Discount                                                3.4
+Discounted Total                                        23.6
 
 Table 3(Occupied)
 -------
-Roast Beef               2      *   10.0   =  20.0
-Chocolate Cake           2      *   4.5    =  9.0
-                                              -----
-Total For This Table                          29.0
-Discount                                      3.0
-Discounted Total                              26.0
+Roast Beef               2      *   10.0(10.0%)      =  18.0
+Chocolate Cake           2      *   4.5(30.0%)       =  6.3
+                                                        -----
+Total For This Table                                    29.0
+Discount                                                4.7
+Discounted Total                                        24.3
 
-=========================_END_============================
-
-
-
-=======_Details of Table With Highest Bill_======== 
-
-Table 3(Occupied)
--------
-Roast Beef               2      *   10.0   =  20.0
-Chocolate Cake           2      *   4.5    =  9.0
-                                              -----
-Total For This Table                          29.0
-Discount                                      3.0
-Discounted Total                              26.0
-
-
-=======================_END_======================= 
+==============================_END_================================
 
 
 
-========_Details of Table With Most Orders_=========
+==============_Details of Table With Highest Bill_============ 
 
 Table 3(Occupied)
 -------
-Roast Beef               2      *   10.0   =  20.0
-Chocolate Cake           2      *   4.5    =  9.0
-                                              -----
-Total For This Table                          29.0
-Discount                                      3.0
-Discounted Total                              26.0
+Roast Beef               2      *   10.0(10.0%)      =  18.0
+Chocolate Cake           2      *   4.5(30.0%)       =  6.3
+                                                        -----
+Total For This Table                                    29.0
+Discount                                                4.7
+Discounted Total                                        24.3
 
 
-=======================_END_========================
+==============================_END_===========================
+
+
+
+===============_Details of Table With Most Orders_============
+
+Table 3(Occupied)
+-------
+Roast Beef               2      *   10.0(10.0%)      =  18.0
+Chocolate Cake           2      *   4.5(30.0%)       =  6.3
+                                                        -----
+Total For This Table                                    29.0
+Discount                                                4.7
+Discounted Total                                        24.3
+
+
+=============================_END_============================
 
 
 

@@ -70,6 +70,8 @@ public class Table {
 	 */
 	public void addOrder(Order order){
 		orders.add(order);
+		discount += order.getOrderDiscount();
+
 	}
 	
 	/**
@@ -113,6 +115,22 @@ public class Table {
 		}
 		return billamount;
 	}
+	
+	
+	/**
+	 *  Public method to return total generated bill with discount for table
+	 * @return double value  for bill amount
+	 */
+	public double getTotalDiscountedBill(){
+		double billamount = 0.0;
+		orderIterator = orders.iterator();
+		while (orderIterator.hasNext()){
+			
+			billamount += orderIterator.next().getOrderPriceWithDiscount();
+			
+		}
+		return billamount;
+	}
 	/**
 	 *  Public method to return Orders For Current Table
 	 * @return double value  for bill amount
@@ -132,20 +150,20 @@ public class Table {
 			report += String.format("%-25s",or.getItem().getItemName() +"");
 			report += String.format("%-5s",or.getQty());
 			report += String.format("%-5s","  *   ");
-			report += String.format("%-5s",or.getItem().getPrice());
+			report += String.format("%-15s",or.getItem().getPrice() + "(" + Global.discountlistgl.get(or.getItem().getCategory()) + "%)");
 			report += String.format("%-5s","  =  ");
-			report += String.format("%-1s",or.getOrderPrice());
+			report += String.format("%-1s",or.getOrderPriceWithDiscount());
 			report += "\n";
 
 		}
-		report += String.format("%-46s","");
+		report += String.format("%-56s","");
 		report += "-----\n";
-		report += String.format("%-46s","Total For This Table");
+		report += String.format("%-56s","Total For This Table");
 		report += String.format("%-1s",this.getTotalBill() + "\n");
-		report += String.format("%-46s","Discount");
-		report += String.format("%-1s",this.getDiscount() + "\n");
-		report += String.format("%-46s","Discounted Total");
-		report += String.format("%-1s",this.getTotalBill() - this.getDiscount() + "\n\n");
+		report += String.format("%-56s","Discount");
+		report += String.format("%-1s", this.getDiscount() + "\n");
+		report += String.format("%-56s","Discounted Total");
+		report += String.format("%-1s",this.getTotalDiscountedBill() + "\n\n");
 		
 		
 		return report;
