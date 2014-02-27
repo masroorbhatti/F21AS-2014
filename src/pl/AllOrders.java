@@ -55,7 +55,7 @@ public class AllOrders {
 		
 		int repeat = 0;
 		String report="";
-		report +=("------Max Ordered Item ---------\n");
+		report +=("===========_Max Ordered Item_==========\n\n");
 		maxItems = new HashSet<String>();
 		for(Order or : Global.orderlistgl){	
 			for(Item it : Global.itemlistgl){
@@ -78,12 +78,14 @@ public class AllOrders {
 				}
 			}
 		}
-		report += "Item Name                   Order Count\n\n";
+		report += "Item Name                   Order Count\n";
+		report += "---------                   -----------\n\n";
 		for (Entry<String, Integer> entry : maxorders.entrySet()) {
 			 report += String.format("%-33s",entry.getKey());
 			 report += String.format("%-15s",entry.getValue());
 		     report += "\n";
 		}
+		report +=("\n================_END_==================\n\n\n\n");
 
 		return report;
 	}

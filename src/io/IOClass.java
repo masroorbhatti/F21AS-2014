@@ -10,6 +10,7 @@ import pl.Table;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -67,19 +68,35 @@ public class IOClass {
 	private void processOrder(String line) {
 		try {
 			String parts [] = line.split(",");
-			int orderno = Integer.parseInt(parts[0]);
-			int tableno = Integer.parseInt(parts[1]);
-			String itemname = parts[2];
-			int quantity = Integer.parseInt(parts[3]);
+			int itemexist = 0;
+
+			int tableno = Integer.parseInt(parts[0]);
+			String itemname = parts[1];
+			int quantity = Integer.parseInt(parts[2]);
+			double discount = Double.parseDouble(parts[3]);
+
+			//Searching if item exist in menu file
+			ArrayList<Item> al = Global.itemlistgl;
+			for(Item it : al){
+				if(it.getItemName().equals(itemname)){
+					itemexist = 1;
+				}
+			}
 			
 			Allitems ai = new Allitems();
 			
 			Table tmptable = Global.resttables.getTable(tableno);
-			tmptable.setDiscount(3.0);
+			tmptable.setDiscount(discount);
 			tmptable.setReserved(true);
-			tmptable.addOrder(new Order(tmptable, ai.getItemFromName(itemname),quantity ));
-			Order or = new Order(tmptable,ai.getItemFromName(itemname),quantity);
-			this.addOrder(or);
+			
+			if(!(itemname.isEmpty()) && itemexist != 0){
+				tmptable.addOrder(new Order(tmptable, ai.getItemFromName(itemname),quantity ));
+				Order or = new Order(tmptable,ai.getItemFromName(itemname),quantity);
+				this.addOrder(or);
+			}
+			else{
+				System.out.println("Item Name was not provided in TableData.csv");
+			}
 			
 		}
 	
@@ -109,11 +126,20 @@ public class IOClass {
 			double price = Double.parseDouble(parts[1]);
 			String category = parts[2];
 			
-			Item it = new Item(dishname, category ,price);
-			this.addItem(it);
+			
+			
+			if(!dishname.isEmpty() || !category.isEmpty()){
+				Item it = new Item(dishname, category ,price);
+				this.addItem(it);
+			}
+			else{
+				System.out.println("Record Ignored as Item Name / Category was not provided in MenuData.csv");
+			}
 
 		}
-	
+		
+		
+		
 		//this catches trying to convert a String to an integer
 		catch (NumberFormatException nfe) {
 			String error = "Number conversion error in '"
@@ -127,8 +153,35 @@ public class IOClass {
 					+ "' index position : " + air.getMessage();
 			System.out.println(error);
 		}
+
 	}
-	
+	/**
+	 * Method used to write report to a file named as Output.txt
+	 * @param report
+	 * @param append
+	 */
+	public void writeToFile(String report,boolean append)
+	{
+		String filename = "Output.txt";
+		FileWriter fw;
+		try{
+			fw = new FileWriter(filename,append);
+			fw.write(report);
+			fw.close();
+		}
+		catch (FileNotFoundException fnf)
+		{
+			 System.out.println(filename + " not found ");
+			 System.exit(0);
+		}
+		catch (Exception ioe)
+		{
+			ioe.printStackTrace();
+		    System.exit(1);
+		}		
+
+	}
+
 	/**
 	 * Method used to add order object into an Arraylist named as orderList 
 	 * @param or

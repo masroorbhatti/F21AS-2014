@@ -119,8 +119,14 @@ public class Table {
 	 */
 	public String getOrderdItemDetails(){
 		String report = "";
-		report += "----------------- Table Summary ----------------- \n\n";
-		report += "Table "+this.getTableno()+"\n";
+		String tablestatus  = "";
+		if(this.isReserved == false){
+			tablestatus = "Un Occupied";
+		}
+		else{
+			tablestatus = "Occupied";
+		}
+		report += "Table "+this.getTableno()+ "(" + tablestatus+ ")\n";
 		report += "-------\n";
 		for(Order or : orders){
 			report += String.format("%-25s",or.getItem().getItemName() +"");
@@ -139,7 +145,7 @@ public class Table {
 		report += String.format("%-46s","Discount");
 		report += String.format("%-1s",this.getDiscount() + "\n");
 		report += String.format("%-46s","Discounted Total");
-		report += String.format("%-1s",this.getTotalBill() - this.getDiscount() + "\n");
+		report += String.format("%-1s",this.getTotalBill() - this.getDiscount() + "\n\n");
 		
 		
 		return report;

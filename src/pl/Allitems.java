@@ -10,6 +10,7 @@ import java.util.Iterator;
 
 import pl.Order;
 import pl.AllOrders;
+import pl.EmptyValue;;
 public class Allitems  {
 	private TreeSet <Item> allitems;    	// TreeSet for storing allitems
 	Iterator<Item> itemsIterator;			//Iterator used to iterator through the treeset 
@@ -37,7 +38,8 @@ public class Allitems  {
 		String report="";	
 	//	report += ("----------------------------MAIN MENU--------------------------");
 		
-		report += String.format("%-19s",category + "\n");
+		report += String.format("%-1s",category + "\n");
+		report += String.format("%-19s","-----------------------------\n");
 		for(Item it : allitems){
 			if(category.equals(it.getCategory())){
 				report += System.lineSeparator();
@@ -59,11 +61,12 @@ public class Allitems  {
 
 		String[] categorylist = this.getCategoryList();
 		String report="";	
-		report += ("----------------------------MAIN MENU--------------------------\n\n");
+		report += ("============_MENU_===========\n\n");
 		for(int i=0;i<categorylist.length;i++){
 			report += this.getItemListByCategory(categorylist[i]);
 		}
-		report += "\n\n";
+		report += "\n===========_END_============";
+		report += "\n\n\n\n";
 		return report;
 
 	}
@@ -132,6 +135,17 @@ public class Allitems  {
 	 * @return
 	 */
 	public Item getItemFromName(String itemname){
+		 try
+		 {
+		     if(itemname.isEmpty())
+		     {
+		          throw new EmptyValue("Item Name is Empty in getItemFromName");
+		     }
+		 }
+		 catch(EmptyValue ex)
+		 {
+			 System.out.println(ex.getMessage());
+		 }
 		Item retitem = null;
 		for(Item it : allitems){
 			if(it.getItemName().equals(itemname)){
@@ -180,7 +194,7 @@ public class Allitems  {
 	 */
 	public String getUnorderedItemList(){
 		String report="";
-		report +=("------DISHES NOT ORDERED---------\n\n");
+		report +=("======_DISHES NOT ORDERED_======\n\n");
 		unorderditems = new HashSet<String>();
 		this.setOrderedItemList();
 		for(Item it : Global.itemlistgl){
@@ -192,6 +206,7 @@ public class Allitems  {
 			report +=(vl + "\n");
 
 		}
+		report +=("\n==============_END_=============\n\n\n\n");
 		return report;
 
 	}
