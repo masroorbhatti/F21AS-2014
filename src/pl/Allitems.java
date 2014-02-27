@@ -15,7 +15,7 @@ public class Allitems  {
 	private TreeSet <Item> allitems;    	// TreeSet for storing allitems
 	Iterator<Item> itemsIterator;			//Iterator used to iterator through the treeset 
 	private Item selectedItem;
-	private HashSet<String> unorderditems;	// HashSet Storing value of unordered items
+	private HashSet<Item> unorderditems;	// HashSet Storing value of unordered items
 	private HashSet<Item> orderditems;	// HashSet Storing value of ordered Items
 
 	
@@ -194,14 +194,14 @@ public class Allitems  {
 	public String getUnorderedItemList(){
 		String report="";
 		report +=("======_DISHES NOT ORDERED_======\n\n");
-		unorderditems = new HashSet<String>();
+		unorderditems = new HashSet<Item>();
 		for(Item it : allitems){
 			if(!orderditems.contains(it.getItemName())){
-				unorderditems.add(it.getItemName());
+				unorderditems.add(it);
 			}
 		}
-		for(String vl : unorderditems){
-			report +=(vl + "\n");
+		for(Item vl : unorderditems){
+			report +=(vl.getItemName() + "\n");
 
 		}
 		report +=("\n==============_END_=============\n\n\n\n");
