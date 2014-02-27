@@ -21,22 +21,31 @@ public class Manager {
 	 * Method used to start program with initialization of basic data
 	 * @throws FileNotFoundException
 	 */
-	public void run() throws FileNotFoundException {
-		
-		IOClass io = new IOClass();
+
+	private Allitems al;
+	private AllOrders ao; 
+	private IOClass io = new IOClass();
+	
+	public Manager() throws FileNotFoundException {
 		
 		//getting item details from menu file
 		io.inputFromFile("MenuData.csv", "menu");
-		Global.itemlistgl = io.getItemList();
+		ArrayList<Item> itemlistgl = io.getItemList();
 		
 		io.inputFromFile("Discount.csv", "discount");
 		
 		//getting order details from table data file
 		io.inputFromFile("TableData.csv", "order");
-		Global.orderlistgl = io.getOrderList();
+		ArrayList<Order> orderlistgl = io.getOrderList();
 		
-		Allitems al = new Allitems();
-		AllOrders ao = new AllOrders();
+		al = new Allitems(itemlistgl);
+		ao = new AllOrders(orderlistgl);
+		al.setOrderedItemList(ao);
+		
+		
+	}
+	
+	public void run() throws FileNotFoundException {
 		
 		//generating final report for some statistics requested
 		String finalreport = "";
