@@ -16,18 +16,20 @@ public class Allitems  {
 	Iterator<Item> itemsIterator;			//Iterator used to iterator through the treeset 
 	private Item selectedItem;
 	private HashSet<String> unorderditems;	// HashSet Storing value of unordered items
-	private HashSet<String> orderditems;	// HashSet Storing value of ordered Items
+	private HashSet<Item> orderditems;	// HashSet Storing value of ordered Items
+
+	
+	
 	/***
 	 * Constructor 
 	 */
 
-	public Allitems() {		
+	public Allitems(ArrayList<Item> itemlistgl) {		
 
-		allitems = new TreeSet<Item>(Global.itemlistgl);
+		allitems = new TreeSet<Item>(itemlistgl);
 		itemsIterator = allitems.iterator();
 
 	}  
-
 
 	/***
 	 * 	Method to getItemList			
@@ -118,7 +120,7 @@ public class Allitems  {
 	 */
 	public double getItemwithHighestPrice(){
 		double max = Double.MIN_VALUE;
-		for (Item it : Global.itemlistgl) {
+		for (Item it : allitems) {
 			double os = it.getPrice();
 			if (os> max) 
 			{
@@ -161,18 +163,15 @@ public class Allitems  {
 	 * 	public method to return ordered items
 	 * @return
 	 */
-	public void setOrderedItemList(){
-		orderditems = new HashSet<String>();
-		for(Item it : Global.itemlistgl){
-			for(Order or : Global.orderlistgl){
-				if(it.getItemName().equals(or.getItem().getItemName())){
-					orderditems.add(it.getItemName());
+	public void setOrderedItemList( AllOrders ord){
+		Iterator<Integer> itorder = ord.getOrders().keySet().iterator();
 
-
+		while (itorder.hasNext()){
+				
+			Integer orderno = itorder.next();
+			Item itm = ord.getOrders().get(orderno).getItem();
+			orderditems.add(itm);
 					//System.out.println(it.getItemName() + "\n");
-				}
-
-			}
 		}
 		
 	}
@@ -180,8 +179,8 @@ public class Allitems  {
 		String report = "";
 		report +=("------Ordered Items---------\n");
 		
-		for(String vl : orderditems){
-			report +=(vl + "\n");
+		for(Item vl : orderditems){
+			report +=(vl.getItemName() + "\n");
 
 		}
 
@@ -196,8 +195,7 @@ public class Allitems  {
 		String report="";
 		report +=("======_DISHES NOT ORDERED_======\n\n");
 		unorderditems = new HashSet<String>();
-		this.setOrderedItemList();
-		for(Item it : Global.itemlistgl){
+		for(Item it : allitems){
 			if(!orderditems.contains(it.getItemName())){
 				unorderditems.add(it.getItemName());
 			}
