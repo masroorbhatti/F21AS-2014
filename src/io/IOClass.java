@@ -8,11 +8,13 @@ import pl.Table;
 
 
 
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.TreeSet;
 
 import com.sun.org.apache.xpath.internal.operations.Or;
 
@@ -77,14 +79,14 @@ public class IOClass {
 			int quantity = Integer.parseInt(parts[2]);
 
 			//Searching if item exist in menu file
-			ArrayList<Item> al = Global.itemlistgl;
+			TreeSet<Item> al = Global.al.getAllItems();
 			for(Item it : al){
 				if(it.getItemName().equals(itemname)){
 					itemexist = 1;
 				}
 			}
 			
-			Allitems ai = new Allitems();
+			Allitems ai = Global.al;
 			
 			Table tmptable = Global.resttables.getTable(tableno);
 			//tmptable.setDiscount(discount);

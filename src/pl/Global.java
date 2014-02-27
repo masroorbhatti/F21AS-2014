@@ -10,11 +10,9 @@ public class Global {
 	 */
 	public static int tableno;
 	public static int orderno;
-	public static ArrayList<Item> itemlistgl;
 	public static HashMap <String,Double> discountlistgl = new HashMap <String,Double>();
-	public static ArrayList<Order> orderlistgl;
-	public static ArrayList<Table> tablellistgl;
 	public static AllTables resttables = new AllTables();
+	public static Allitems al;  
 
 	/**
 	 * static method to return last table no

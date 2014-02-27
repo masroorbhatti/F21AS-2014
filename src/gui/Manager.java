@@ -22,7 +22,7 @@ public class Manager {
 	 * @throws FileNotFoundException
 	 */
 
-	private Allitems al;
+
 	private AllOrders ao; 
 	private IOClass io = new IOClass();
 	
@@ -38,9 +38,9 @@ public class Manager {
 		io.inputFromFile("TableData.csv", "order");
 		ArrayList<Order> orderlistgl = io.getOrderList();
 		
-		al = new Allitems(itemlistgl);
+		Global.al = new Allitems(itemlistgl);
 		ao = new AllOrders(orderlistgl);
-		al.setOrderedItemList(ao);
+		Global.al.setOrderedItemList(ao);
 		
 		
 	}
@@ -49,9 +49,9 @@ public class Manager {
 		
 		//generating final report for some statistics requested
 		String finalreport = "";
-		finalreport += al.getAllItemListAccToCat();
+		finalreport += Global.al.getAllItemListAccToCat();
 		finalreport += ao.getMaxOrderedItem();
-		finalreport += al.getUnorderedItemList();
+		finalreport += Global.al.getUnorderedItemList();
 		finalreport += Global.resttables.getOccupiedTableRecords();
 		finalreport += Global.resttables.getReportOfTableWithHighestBill();
 		finalreport += Global.resttables.getReportOfTableWithMostOrders();

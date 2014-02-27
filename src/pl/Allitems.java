@@ -31,6 +31,10 @@ public class Allitems  {
 
 	}  
 
+	public TreeSet<Item> getAllItems(){
+		return allitems;
+	}
+	
 	/***
 	 * 	Method to getItemList			
 	 * @return
