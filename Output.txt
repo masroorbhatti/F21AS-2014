@@ -1,0 +1,118 @@
+============_MENU_===========
+
+Starter
+-----------------------------
+
+     Carrot Soup        3.5                
+     Smoked Salmon      6.0                
+
+Main
+-----------------------------
+
+     Chicken Balerno    8.0                
+     Roast Beef         10.0               
+
+Dessert
+-----------------------------
+
+     Chocolate Cake     4.5                
+
+Drinks
+-----------------------------
+
+     Coffee and Mints   2.5                
+
+
+===========_END_============
+
+
+
+===========_Max Ordered Item_==========
+
+Item Name                   Order Count
+---------                   -----------
+
+Carrot Soup                      2              
+Chocolate Cake                   1              
+Roast Beef                       3              
+Smoked Salmon                    1              
+
+================_END_==================
+
+
+
+======_DISHES NOT ORDERED_======
+
+Chicken Balerno
+Coffee and Mints
+
+==============_END_=============
+
+
+
+==========_Cost Of ALL Order For Table Used_============
+
+Table 1(Occupied)
+-------
+Smoked Salmon            1      *   6.0    =  6.0
+Carrot Soup              1      *   3.5    =  3.5
+Roast Beef               2      *   10.0   =  20.0
+                                              -----
+Total For This Table                          29.5
+Discount                                      2.0
+Discounted Total                              27.5
+
+Table 2(Occupied)
+-------
+Carrot Soup              2      *   3.5    =  7.0
+Roast Beef               2      *   10.0   =  20.0
+                                              -----
+Total For This Table                          27.0
+Discount                                      4.0
+Discounted Total                              23.0
+
+Table 3(Occupied)
+-------
+Roast Beef               2      *   10.0   =  20.0
+Chocolate Cake           2      *   4.5    =  9.0
+                                              -----
+Total For This Table                          29.0
+Discount                                      3.0
+Discounted Total                              26.0
+
+=========================_END_============================
+
+
+
+=======_Details of Table With Highest Bill_======== 
+
+Table 3(Occupied)
+-------
+Roast Beef               2      *   10.0   =  20.0
+Chocolate Cake           2      *   4.5    =  9.0
+                                              -----
+Total For This Table                          29.0
+Discount                                      3.0
+Discounted Total                              26.0
+
+
+=======================_END_======================= 
+
+
+
+========_Details of Table With Most Orders_=========
+
+Table 3(Occupied)
+-------
+Roast Beef               2      *   10.0   =  20.0
+Chocolate Cake           2      *   4.5    =  9.0
+                                              -----
+Total For This Table                          29.0
+Discount                                      3.0
+Discounted Total                              26.0
+
+
+=======================_END_========================
+
+
+
