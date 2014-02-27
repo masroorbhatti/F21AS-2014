@@ -1,5 +1,6 @@
 package pl;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -10,19 +11,22 @@ import java.util.Set;
 import java.util.TreeMap;
 public class AllOrders {
 	private TreeMap<Integer ,Order> allorders;		// TreeMap For storing All Orders
-	Iterator<Integer> ordersIterator;				// Iterator for iterating thorugh TreeMAp
 	private HashSet<String> maxItems;		
 	private TreeMap<String ,Integer> maxorders;
+	private Iterator<Integer> ordersIterator;				// Iterator to iterate  
 	/***
 	 * Constructor
 	 */
-	public AllOrders(){
+	public AllOrders(ArrayList<Order> orderlistgl){
 		allorders = new TreeMap<Integer,Order>();
 		int c=1;
-		for(Order o : Global.orderlistgl){
+		for(Order o : orderlistgl){
 			allorders.put(c, o);
 			c++;
 		}
+	}
+	public TreeMap<Integer,Order> getOrders(){
+		return allorders;
 	}
 	/**
 	 *  Public method returning  list of allorders
@@ -49,8 +53,31 @@ public class AllOrders {
 	 * 	public method to get maxiumum ordered item
 	 * @return
 	 */
+	
+	
+	public TreeMap<String,Integer> getFrequency(){
+		TreeMap<String,Integer> itemfreq = new TreeMap<String,Integer>();
+		Iterator<Integer> oriterator = allorders.keySet().iterator();
+		Integer val=0;
+		while (oriterator.hasNext()){
+			Integer orderno = oriterator.next();
+			Item itm = allorders.get(orderno).getItem();
+			if (itemfreq.get(itm.getItemName()) == null)
+				itemfreq.put(itm.getItemName(), 1);
+			else{
+				val = itemfreq.get(itm.getItemName());
+				itemfreq.put(itm.getItemName(), val++);
+			}
+		}
+		return itemfreq;
+	}
 	public String getMaxOrderedItem(){
 
+		
+
+		
+		
+		
 		maxorders = new TreeMap<String,Integer>();
 		
 		int repeat = 0;
