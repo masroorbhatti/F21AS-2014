@@ -16,7 +16,7 @@ import pl.Item;
 public class ItemTest {
 
 	/**
-	 * Test method for {@link pl.Item#compareTo(pl.Item)}.
+	 * Test method for {pl.Item#compareTo(pl.Item)}.
 	 */
 	@Test
 	public void testCompareTo() {
