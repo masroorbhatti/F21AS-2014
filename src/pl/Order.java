@@ -12,6 +12,9 @@ public class Order implements Comparable<Order> {
 	 * Public constructor for Order class 
 	 */	
 	public Order(Table table, Item item, int qty){
+		if(table == null || item == null || qty == 0){
+			throw new IllegalArgumentException("Paramerters cannot be null in class Order");
+		}
 		setOrdernumber(Global.getNewOrderNo());
 		setTable(table); 
 		setItem(item);
