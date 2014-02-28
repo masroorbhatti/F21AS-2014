@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Global {
-	
+
 	/**
 	 * Public static variables to maintain value throughout all objects 
 	 */
@@ -29,7 +29,7 @@ public class Global {
 	public static int getOrderNo(){
 		return orderno;
 	}
-	
+
 	/**
 	 * public method to get new order no, used in order constructor
 	 * @return int value for new orderno
@@ -37,7 +37,7 @@ public class Global {
 	public static int getNewOrderNo(){
 		return orderno++;
 	}
-	
+
 	/**
 	 * public method to get new table no, used in table constructor
 	 * @return int value for new tableno
@@ -45,5 +45,5 @@ public class Global {
 	public static int getNewTableNo(){
 		return tableno++;
 	}
-	
+
 }

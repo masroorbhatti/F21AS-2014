@@ -139,32 +139,32 @@ public class Table {
 		String report = "";
 		String tablestatus  = "";
 		if(this.isReserved == false){
-			tablestatus = "Un Occupied";
+			report = "No Customer found on this Table";
 		}
 		else{
 			tablestatus = "Occupied";
-		}
-		report += "Table "+this.getTableno()+ "(" + tablestatus+ ")\n";
-		report += "-------\n";
-		for(Order or : orders){
-			report += String.format("%-25s",or.getItem().getItemName() +"");
-			report += String.format("%-5s",or.getQty());
-			report += String.format("%-5s","  *   ");
-			report += String.format("%-15s",or.getItem().getPrice() + "(" + Global.discountlistgl.get(or.getItem().getCategory()) + "%)");
-			report += String.format("%-5s","  =  ");
-			report += String.format("%-1s",or.getOrderPriceWithDiscount());
-			report += "\n";
-
-		}
-		report += String.format("%-56s","");
-		report += "-----\n";
-		report += String.format("%-56s","Total For This Table");
-		report += String.format("%-1s",this.getTotalBill() + "\n");
-		report += String.format("%-56s","Discount");
-		report += String.format("%-1s", this.getDiscount() + "\n");
-		report += String.format("%-56s","Discounted Total");
-		report += String.format("%-1s",this.getTotalDiscountedBill() + "\n\n");
 		
+			report += "Table "+this.getTableno()+ "(" + tablestatus+ ")\n";
+			report += "-------\n";
+			for(Order or : orders){
+				report += String.format("%-25s",or.getItem().getItemName() +"");
+				report += String.format("%-5s",or.getQty());
+				report += String.format("%-5s","  *   ");
+				report += String.format("%-15s",or.getItem().getPrice() + "(" + Global.discountlistgl.get(or.getItem().getCategory()) + "%)");
+				report += String.format("%-5s","  =  ");
+				report += String.format("%-1s",or.getOrderPriceWithDiscount());
+				report += "\n";
+	
+			}
+			report += String.format("%-56s","");
+			report += "-----\n";
+			report += String.format("%-56s","Total For This Table");
+			report += String.format("%-1s",this.getTotalBill() + "\n");
+			report += String.format("%-56s","Discount");
+			report += String.format("%-1s", this.getDiscount() + "\n");
+			report += String.format("%-56s","Discounted Total");
+			report += String.format("%-1s",this.getTotalDiscountedBill() + "\n\n");
+		}
 		
 		return report;
 	}

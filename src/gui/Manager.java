@@ -25,53 +25,57 @@ public class Manager {
 
 	private AllOrders ao; 
 	private IOClass io = new IOClass();
-	
+
 	public Manager() throws FileNotFoundException {
-		
+
 		//getting item details from menu file
 		io.inputFromFile("MenuData.csv", "menu");
 		ArrayList<Item> itemlistgl = io.getItemList();
-		
+		Global.al = new Allitems(itemlistgl);
+	
 		io.inputFromFile("Discount.csv", "discount");
-		
+
 		//getting order details from table data file
 		io.inputFromFile("TableData.csv", "order");
 		ArrayList<Order> orderlistgl = io.getOrderList();
+
 		
-		Global.al = new Allitems(itemlistgl);
 		ao = new AllOrders(orderlistgl);
 		Global.al.setOrderedItemList(ao);
-		
-		
+			
+
+
 	}
-	
+
 	public void run() throws FileNotFoundException {
-		
+
 		//generating final report for some statistics requested
 		String finalreport = "";
 		finalreport += Global.al.getAllItemListAccToCat();
-		finalreport += ao.getMaxOrderedItem();
+		finalreport += ao.getFrequency();
 		finalreport += Global.al.getUnorderedItemList();
 		finalreport += Global.resttables.getOccupiedTableRecords();
 		finalreport += Global.resttables.getReportOfTableWithHighestBill();
 		finalreport += Global.resttables.getReportOfTableWithMostOrders();
 
 		io.writeToFile(finalreport, false);
-		
+
 		//jOption panel to get input from used 
-		getJOptionPane();
-
-
+		//getJOptionPane();
+		GUIClass gui = new GUIClass();
 		
+		gui.setVisible(true);
+
+
 	}
-	
+
 	/**
 	 * Method used to show JOption Panel to ask for table no as input and shows the details of that table as output
 	 */
 	public void getJOptionPane(){
 		   boolean ok = false;
 			int count = 0;
-			
+
 			//will ask for the input three times
 			while (!ok && count <4) {
 				//Asking for input a competitor ID
@@ -81,10 +85,10 @@ public class Manager {
 					tablelist +=  tb.getTableno()+"  ";
 				}
 				String id = JOptionPane.showInputDialog(null, "Enter Table No From The Following Occupied Tables To Check Details : \n"+tablelist);
-				
+
 				Table tb = Global.resttables.getTable(Integer.parseInt(id));
-				
-				
+
+
 				if (tb!=null) {
 					String result = tb.getOrderdItemDetails();
 					System.out.println(result);
@@ -100,5 +104,5 @@ public class Manager {
 	}
 
 
-	
+
 }

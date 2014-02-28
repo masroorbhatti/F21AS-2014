@@ -18,8 +18,8 @@ public class Allitems  {
 	private HashSet<Item> unorderditems;	// HashSet Storing value of unordered items
 	private HashSet<Item> orderditems;	// HashSet Storing value of ordered Items
 
-	
-	
+
+
 	/***
 	 * Constructor 
 	 */
@@ -34,7 +34,7 @@ public class Allitems  {
 	public TreeSet<Item> getAllItems(){
 		return allitems;
 	}
-	
+
 	/***
 	 * 	Method to getItemList			
 	 * @return
@@ -43,7 +43,7 @@ public class Allitems  {
 
 		String report="";	
 	//	report += ("----------------------------MAIN MENU--------------------------");
-		
+
 		report += String.format("%-1s",category + "\n");
 		report += String.format("%-19s","-----------------------------\n");
 		for(Item it : allitems){
@@ -54,7 +54,7 @@ public class Allitems  {
 				report += String.format("%-19s",it.getPrice());
 			}
 		}
-	
+
 		report += "\n\n";
 		return report;
 
@@ -76,7 +76,7 @@ public class Allitems  {
 		return report;
 
 	}
-	
+
 	/***
 	 * 	Method to getItemList			
 	 * @return
@@ -84,7 +84,7 @@ public class Allitems  {
 	public String[] getCategoryList(){
 
 		String[] categorylist = new String[20];
-	
+
 		String report="";	
 		int count=0;
 		int repeat = 0;
@@ -168,21 +168,29 @@ public class Allitems  {
 	 * @return
 	 */
 	public void setOrderedItemList( AllOrders ord){
+		orderditems = new HashSet<Item>();
+		unorderditems = new HashSet<Item>();
+		
+		for(Item it : Global.al.getAllItems()){
+			unorderditems.add(it);
+		}
+		
 		Iterator<Integer> itorder = ord.getOrders().keySet().iterator();
 
 		while (itorder.hasNext()){
-				
+
 			Integer orderno = itorder.next();
 			Item itm = ord.getOrders().get(orderno).getItem();
 			orderditems.add(itm);
-					//System.out.println(it.getItemName() + "\n");
+			unorderditems.remove(itm);
+
 		}
-		
+
 	}
 	public String getOrderedItemList(){
 		String report = "";
 		report +=("------Ordered Items---------\n");
-		
+
 		for(Item vl : orderditems){
 			report +=(vl.getItemName() + "\n");
 
@@ -198,12 +206,7 @@ public class Allitems  {
 	public String getUnorderedItemList(){
 		String report="";
 		report +=("======_DISHES NOT ORDERED_======\n\n");
-		unorderditems = new HashSet<Item>();
-		for(Item it : allitems){
-			if(!orderditems.contains(it.getItemName())){
-				unorderditems.add(it);
-			}
-		}
+		
 		for(Item vl : unorderditems){
 			report +=(vl.getItemName() + "\n");
 

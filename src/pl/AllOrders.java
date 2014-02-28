@@ -53,12 +53,14 @@ public class AllOrders {
 	 * 	public method to get maxiumum ordered item
 	 * @return
 	 */
-	
-	
-	public TreeMap<String,Integer> getFrequency(){
+
+
+	public String getFrequency(){
 		TreeMap<String,Integer> itemfreq = new TreeMap<String,Integer>();
 		Iterator<Integer> oriterator = allorders.keySet().iterator();
 		Integer val=0;
+		String report = "";
+		report +=("===========_Frequency Report_==========\n\n");
 		while (oriterator.hasNext()){
 			Integer orderno = oriterator.next();
 			Item itm = allorders.get(orderno).getItem();
@@ -66,20 +68,33 @@ public class AllOrders {
 				itemfreq.put(itm.getItemName(), 1);
 			else{
 				val = itemfreq.get(itm.getItemName());
-				itemfreq.put(itm.getItemName(), val++);
+				itemfreq.put(itm.getItemName(), ++val);
 			}
 		}
-		return itemfreq;
+//		return itemfreq;
+		report += "Item Name                   Order Count\n";
+		report += "---------                   -----------\n\n";
+		for (Entry<String, Integer> entry : itemfreq.entrySet()) {
+			 report += String.format("%-33s",entry.getKey());
+			 report += String.format("%-15s",entry.getValue());
+		     report += "\n";
+		}
+		report +=("\n================_END_==================\n\n\n\n");
+
+		return report;
+
 	}
+	
+	/*
 	public String getMaxOrderedItem(){
 
-		
 
-		
-		
-		
+
+
+
+
 		maxorders = new TreeMap<String,Integer>();
-		
+
 		int repeat = 0;
 		String report="";
 		report +=("===========_Max Ordered Item_==========\n\n");
@@ -97,11 +112,11 @@ public class AllOrders {
 					}
 					if(repeat == 0){
 						maxorders.put(it.getItemName(), 1);
-						
+
 					}
 					else
 						repeat = 0;
-					
+
 				}
 			}
 		}
@@ -116,6 +131,8 @@ public class AllOrders {
 
 		return report;
 	}
+	
+	*/
 	public String getCostOfOrderForEachTable(int tbno){
 		String report="";
 		int count=0;
@@ -128,7 +145,7 @@ public class AllOrders {
 				report += ("-------------------------------Table No "+ allorders.get(orderno).getTable().getTableno() + " --------------------------\n");
 				count = 1;
 			}
-			
+
 			report += String.format("%20s",allorders.get(orderno).getItem().getItemName()+"");
 			report += String.format("%20s",allorders.get(orderno).getQty()+ "  *   " + allorders.get(orderno).getItem().getPrice() +"  =  ");
 			report += String.format("%20s",allorders.get(orderno).getOrderPrice());
@@ -136,11 +153,10 @@ public class AllOrders {
 			report += ("\n");
 			}
 		}
-		
-		
+
+
 
 		return report;
 	}
 
 }
-

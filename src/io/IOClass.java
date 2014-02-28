@@ -33,7 +33,7 @@ public class IOClass {
 		tableList = new ArrayList<Table>();
 
 	}
-	
+
 	/**
 	 * Method used to read data from TableData and MenuData file
 	 * @param filename
@@ -57,14 +57,14 @@ public class IOClass {
 						processMenu(inputLine);
 				}
 			}
-			
+
 		}
 		//if the file is not found, stop with system exit
 		catch (FileNotFoundException fnf){
 			throw fnf ;
 		}
 	}
-	
+
 	/**
 	 * Method used to process each line from TabeData file
 	 * @param line
@@ -85,13 +85,13 @@ public class IOClass {
 					itemexist = 1;
 				}
 			}
-			
+
 			Allitems ai = Global.al;
-			
+
 			Table tmptable = Global.resttables.getTable(tableno);
 			//tmptable.setDiscount(discount);
 			tmptable.setReserved(true);
-			
+
 			if(!(itemname.isEmpty()) && itemexist != 0){
 				tmptable.addOrder(new Order(tmptable, ai.getItemFromName(itemname),quantity ));
 				Order or = new Order(tmptable,ai.getItemFromName(itemname),quantity);
@@ -100,9 +100,9 @@ public class IOClass {
 			else{
 				System.out.println("Item Name was not provided in TableData.csv");
 			}
-			
+
 		}
-	
+
 		//this catches trying to convert a String to an integer
 		catch (NumberFormatException nfe) {
 			String error = "Number conversion error in '"
@@ -117,7 +117,7 @@ public class IOClass {
 			System.out.println(error);
 		}
 	}
-	
+
 	/**
 	 * Method used to prcoess each line from MenuData file
 	 * @param line
@@ -128,9 +128,9 @@ public class IOClass {
 			String dishname = parts[0];
 			double price = Double.parseDouble(parts[1]);
 			String category = parts[2];
-			
-			
-			
+
+
+
 			if(!dishname.isEmpty() || !category.isEmpty()){
 				Item it = new Item(dishname, category ,price);
 				this.addItem(it);
@@ -140,7 +140,7 @@ public class IOClass {
 			}
 
 		}
-		
+
 
 		//this catches trying to convert a String to an integer
 		catch (NumberFormatException nfe) {
@@ -157,7 +157,7 @@ public class IOClass {
 		}
 
 	}
-	
+
 	/**
 	 * Method used to prcoess each line from MenuData file
 	 * @param line
@@ -174,7 +174,7 @@ public class IOClass {
 				Global.discountlistgl.put(itemcategory, discount);	
 
 		}
-		
+
 
 		//this catches trying to convert a String to an integer
 		catch (NumberFormatException nfe) {
@@ -182,10 +182,10 @@ public class IOClass {
 					+ line + "'  - " + nfe.getMessage();
 			System.out.println(error);
 		}
-	
+
 
 	}
-	
+
 	/**
 	 * Method used to write report to a file named as Output.txt
 	 * @param report
@@ -228,7 +228,7 @@ public class IOClass {
 	public void addItem( Item it){
 		itemList.add(it);	
 	}
-	
+
 	/**
 	 * Method used to add item object into an Arraylist name as itemList 
 	 * @param it
@@ -244,7 +244,7 @@ public class IOClass {
 	public ArrayList<Item> getItemList(){
 		return this.itemList;
 	}
-	
+
 	/**
 	 * Method used to return orderlist
 	 * @return
