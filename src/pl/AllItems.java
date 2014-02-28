@@ -8,7 +8,7 @@ import java.util.Iterator;
 
 import pl.AllOrders;
 import pl.EmptyValueException;;
-public class Allitems  {
+public class AllItems  {
 	private TreeSet <Item> allitems;    	// TreeSet for storing allitems
 	Iterator<Item> itemsIterator;			//Iterator used to iterator through the treeset 
 	private HashSet<Item> unorderditems;	// HashSet Storing value of unordered items
@@ -20,7 +20,7 @@ public class Allitems  {
 	 * Constructor 
 	 */
 
-	public Allitems(ArrayList<Item> itemlistgl) {		
+	public AllItems(ArrayList<Item> itemlistgl) {		
 
 		allitems = new TreeSet<Item>(itemlistgl);
 		itemsIterator = allitems.iterator();

@@ -86,7 +86,7 @@ public class IOClass {
 				}
 			}
 
-			Allitems ai = Shared.al;
+			AllItems ai = Shared.al;
 
 			Table tmptable = Shared.resttables.getTable(tableno);
 			//tmptable.setDiscount(discount);

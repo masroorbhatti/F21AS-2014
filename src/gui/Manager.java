@@ -26,7 +26,7 @@ public class Manager {
 		//getting item details from menu file
 		io.inputFromFile("MenuData.csv", "menu");
 		ArrayList<Item> itemlistgl = io.getItemList();
-		Shared.al = new Allitems(itemlistgl);
+		Shared.al = new AllItems(itemlistgl);
 	
 		io.inputFromFile("Discount.csv", "discount");
 

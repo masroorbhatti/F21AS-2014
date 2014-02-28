@@ -3,7 +3,7 @@ package global;
 import java.util.HashMap;
 
 import pl.AllTables;
-import pl.Allitems;
+import pl.AllItems;
 
 public class Shared {
 
@@ -14,7 +14,7 @@ public class Shared {
 	public static int orderno;
 	public static HashMap <String,Double> discountlistgl = new HashMap <String,Double>();
 	public static AllTables resttables = new AllTables();
-	public static Allitems al;  
+	public static AllItems al;  
 
 	/**
 	 * static method to return last table no
