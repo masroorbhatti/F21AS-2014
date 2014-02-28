@@ -27,7 +27,7 @@ Drinks
 
 
 
-===========_Max Ordered Item_==========
+===========_Frequency Report_==========
 
 Item Name                   Order Count
 ---------                   -----------

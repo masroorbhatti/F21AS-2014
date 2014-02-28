@@ -1,8 +1,7 @@
 package gui;
 
-import java.awt.BorderLayout;
-import java.awt.ComponentOrientation;
-import java.awt.EventQueue;
+import global.Shared;
+
 import java.awt.Font;
 
 import javax.swing.JFrame;
@@ -13,23 +12,21 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
-import javax.swing.ScrollPaneConstants;
 
-import pl.Global;
 import pl.Table;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
-import javax.swing.JTextPane;
-import javax.swing.JEditorPane;
-import javax.swing.JList;
 import javax.swing.JTable;
-import javax.swing.JScrollBar;
 
 public class GUIClass extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextArea textArea,textArea_1;
@@ -73,7 +70,7 @@ public class GUIClass extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int input = Integer.parseInt(textField.getText());
-				Table tb = Global.resttables.getTable(input);
+				Table tb = Shared.resttables.getTable(input);
 				if (tb!=null) {
 					textArea.setText(tb.getOrderdItemDetails());
 				}
@@ -83,29 +80,27 @@ public class GUIClass extends JFrame {
 				
 			}
 		});
-		btnNewButton.setBounds(147, 48, 95, 23);
+		btnNewButton.setBounds(147, 48, 125, 23);
 		contentPane.add(btnNewButton);
 		
-		lblNewLabel = new JLabel("List of Tables");
+		lblNewLabel = new JLabel("List of Occupied Tables");
 		lblNewLabel.setFont(new Font("Trebuchet MS", Font.PLAIN, 11));
-		lblNewLabel.setBounds(271, 16, 87, 23);
+		lblNewLabel.setBounds(368, 10, 125, 23);
 		contentPane.add(lblNewLabel);
 		
-		JList list = new JList();
-		list.setBounds(314, 63, 119, -22);
-		contentPane.add(list);
+
 		
 		table = new JTable();
 		table.setBounds(314, 63, 131, -22);
 		contentPane.add(table);
-		ArrayList<Table> tblist = Global.resttables.getOccupiedTableList();
+		ArrayList<Table> tblist = Shared.resttables.getOccupiedTableList();
 		String tablelist = "";
 		for(Table tb : tblist){
 			tablelist +=  tb.getTableno()+"\n";
 		}
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(368, 20, 115, 51);
+		scrollPane.setBounds(368, 30, 115, 51);
 		contentPane.add(scrollPane);
 		
 		textArea_1 = new JTextArea();

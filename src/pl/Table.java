@@ -1,6 +1,7 @@
 package pl;
 
-import java.util.HashSet;
+import global.Shared;
+
 import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
@@ -16,7 +17,7 @@ public class Table {
 	 *  Public default constructor for Table class
 	 */
 	public Table(){
-		setTableno(Global.getNewTableNo());
+		setTableno(Shared.getNewTableNo());
 		setReserved(false);
 		orders = new TreeSet<Order>();
 		setDiscount(0);
@@ -150,7 +151,7 @@ public class Table {
 				report += String.format("%-25s",or.getItem().getItemName() +"");
 				report += String.format("%-5s",or.getQty());
 				report += String.format("%-5s","  *   ");
-				report += String.format("%-15s",or.getItem().getPrice() + "(" + Global.discountlistgl.get(or.getItem().getCategory()) + "%)");
+				report += String.format("%-15s",or.getItem().getPrice() + "(" + Shared.discountlistgl.get(or.getItem().getCategory()) + "%)");
 				report += String.format("%-5s","  =  ");
 				report += String.format("%-1s",or.getOrderPriceWithDiscount());
 				report += "\n";

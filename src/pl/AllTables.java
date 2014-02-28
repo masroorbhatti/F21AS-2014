@@ -129,8 +129,6 @@ public class AllTables {
 		 tablesIterator = alltables.keySet().iterator();	// Iterator to iterate map
 		 Integer tableno;
 		 Table tmptable;
-		 int tmporderqty=0;				//maintaining max orders to used in comparison 
-		 int tmptableno=0;				//maintaining table no of highest orders  
 		 report += "===============_Cost Of ALL Order For Table Used_================\n\n";
 		while (tablesIterator.hasNext()){
 			tableno = tablesIterator.next();

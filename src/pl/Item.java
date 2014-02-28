@@ -1,5 +1,7 @@
 package pl;
 
+import global.Shared;
+
 public class Item implements Comparable<Item> {
 
 	
@@ -40,7 +42,7 @@ public class Item implements Comparable<Item> {
 	 * @return double value of price
 	 */
 	public double geDiscountedtPrice(){
-		double discount = Global.discountlistgl.get(this.getCategory());
+		double discount = Shared.discountlistgl.get(this.getCategory());
 		double result = (double) (this.getPrice() * discount ) / 100;
 		result = this.getPrice() - result;
 		return result;

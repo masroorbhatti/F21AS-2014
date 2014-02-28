@@ -1,9 +1,11 @@
-package pl;
+package global;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Global {
+import pl.AllTables;
+import pl.Allitems;
+
+public class Shared {
 
 	/**
 	 * Public static variables to maintain value throughout all objects 

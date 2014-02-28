@@ -1,13 +1,6 @@
 package io;
-import pl.AllTables;
-import pl.Allitems;
-import pl.Global;
-import pl.Order;
-import pl.Item;
-import pl.Table;
-
-
-
+import pl.*;
+import global.Shared;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -15,8 +8,6 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.TreeSet;
-
-import com.sun.org.apache.xpath.internal.operations.Or;
 
 public class IOClass {
 
@@ -41,9 +32,11 @@ public class IOClass {
 	 * @throws FileNotFoundException
 	 */
 	public void inputFromFile(String filename,String filetype) throws FileNotFoundException	{
+		
+		Scanner fr = null;
 		try {
 			File f = new File(filename);
-			Scanner fr = new Scanner(f);
+			fr = new Scanner(f);
 			while (fr.hasNextLine()) {
 
 				//read first line and process it
@@ -59,9 +52,16 @@ public class IOClass {
 			}
 
 		}
+		// part of code taken from lectures slides - L01Errors.ppt
 		//if the file is not found, stop with system exit
-		catch (FileNotFoundException fnf){
-			throw fnf ;
+		catch(FileNotFoundException e) {
+		    //print ‘file not found’ message and stop
+		    System.out.println(e.getMessage());
+		    System.exit(1);  //terminates program
+		  }
+
+		finally{
+			fr.close();
 		}
 	}
 
@@ -79,16 +79,16 @@ public class IOClass {
 			int quantity = Integer.parseInt(parts[2]);
 
 			//Searching if item exist in menu file
-			TreeSet<Item> al = Global.al.getAllItems();
+			TreeSet<Item> al = Shared.al.getAllItems();
 			for(Item it : al){
 				if(it.getItemName().equals(itemname)){
 					itemexist = 1;
 				}
 			}
 
-			Allitems ai = Global.al;
+			Allitems ai = Shared.al;
 
-			Table tmptable = Global.resttables.getTable(tableno);
+			Table tmptable = Shared.resttables.getTable(tableno);
 			//tmptable.setDiscount(discount);
 			tmptable.setReserved(true);
 
@@ -121,28 +121,32 @@ public class IOClass {
 	/**
 	 * Method used to prcoess each line from MenuData file
 	 * @param line
+	 * @throws NotFoundException 
 	 */
-	private void processMenu(String line) {
+	private void processMenu(String line)  {
 		try {
 			String parts [] = line.split(",");
-			String dishname = parts[0];
+			String dishname = parts[0].trim();
 			double price = Double.parseDouble(parts[1]);
-			String category = parts[2];
+			String category = parts[2].trim();
 
 
 
-			if(!dishname.isEmpty() || !category.isEmpty()){
+			if(!dishname.isEmpty() && !category.isEmpty()){
 				Item it = new Item(dishname, category ,price);
 				this.addItem(it);
 			}
 			else{
-				System.out.println("Record Ignored as Item Name / Category was not provided in MenuData.csv");
+				throw new NotFoundException("Record Ignored as Item Name / Category was not provided in MenuData.csv");
 			}
 
 		}
 
 
 		//this catches trying to convert a String to an integer
+		catch (NotFoundException nfex){
+			System.out.println(nfex.getMessage());
+		}
 		catch (NumberFormatException nfe) {
 			String error = "Number conversion error in '"
 					+ line + "'  - " + nfe.getMessage();
@@ -171,7 +175,7 @@ public class IOClass {
 				System.out.println("Discount Cannot be greater then 100%");
 			}
 			else
-				Global.discountlistgl.put(itemcategory, discount);	
+				Shared.discountlistgl.put(itemcategory, discount);	
 
 		}
 

@@ -1,20 +1,16 @@
 package pl;
-import java.awt.List;
-import java.lang.reflect.Array;
+import global.Shared;
+
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Set;
-import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.Iterator;
 
-import pl.Order;
 import pl.AllOrders;
-import pl.EmptyValue;;
+import pl.EmptyValueException;;
 public class Allitems  {
 	private TreeSet <Item> allitems;    	// TreeSet for storing allitems
 	Iterator<Item> itemsIterator;			//Iterator used to iterator through the treeset 
-	private Item selectedItem;
 	private HashSet<Item> unorderditems;	// HashSet Storing value of unordered items
 	private HashSet<Item> orderditems;	// HashSet Storing value of ordered Items
 
@@ -85,10 +81,8 @@ public class Allitems  {
 
 		String[] categorylist = new String[20];
 
-		String report="";	
 		int count=0;
 		int repeat = 0;
-		report += ("---------------------------- MENU --------------------------");
 		while(itemsIterator.hasNext()){
 			Item o1 =  (Item) ((Iterator<Item>) itemsIterator).next();
 				for(int i=0;i<categorylist.length;i++){
@@ -137,7 +131,7 @@ public class Allitems  {
 	}
 	/***
 	 * 			
-	 * public Method to fetch item by itemname
+	 * public Method to fetch item by item name
 	 * @return
 	 */
 	public Item getItemFromName(String itemname){
@@ -145,10 +139,10 @@ public class Allitems  {
 		 {
 		     if(itemname.isEmpty())
 		     {
-		          throw new EmptyValue("Item Name is Empty in getItemFromName");
+		          throw new EmptyValueException("Item Name is Empty in getItemFromName");
 		     }
 		 }
-		 catch(EmptyValue ex)
+		 catch(EmptyValueException ex)
 		 {
 			 System.out.println(ex.getMessage());
 		 }
@@ -171,7 +165,7 @@ public class Allitems  {
 		orderditems = new HashSet<Item>();
 		unorderditems = new HashSet<Item>();
 		
-		for(Item it : Global.al.getAllItems()){
+		for(Item it : Shared.al.getAllItems()){
 			unorderditems.add(it);
 		}
 		

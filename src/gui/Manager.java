@@ -1,19 +1,14 @@
 package gui;
 
+import global.Shared;
 import io.IOClass;
+
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-import pl.AllOrders;
-import pl.Allitems;
-import pl.Item;
-import pl.Order;
-import pl.Global;
-import pl.Table;
-
-import io.IOClass;
+import pl.*;
 public class Manager {
 
 
@@ -31,7 +26,7 @@ public class Manager {
 		//getting item details from menu file
 		io.inputFromFile("MenuData.csv", "menu");
 		ArrayList<Item> itemlistgl = io.getItemList();
-		Global.al = new Allitems(itemlistgl);
+		Shared.al = new Allitems(itemlistgl);
 	
 		io.inputFromFile("Discount.csv", "discount");
 
@@ -41,7 +36,7 @@ public class Manager {
 
 		
 		ao = new AllOrders(orderlistgl);
-		Global.al.setOrderedItemList(ao);
+		Shared.al.setOrderedItemList(ao);
 			
 
 
@@ -51,12 +46,12 @@ public class Manager {
 
 		//generating final report for some statistics requested
 		String finalreport = "";
-		finalreport += Global.al.getAllItemListAccToCat();
+		finalreport += Shared.al.getAllItemListAccToCat();
 		finalreport += ao.getFrequency();
-		finalreport += Global.al.getUnorderedItemList();
-		finalreport += Global.resttables.getOccupiedTableRecords();
-		finalreport += Global.resttables.getReportOfTableWithHighestBill();
-		finalreport += Global.resttables.getReportOfTableWithMostOrders();
+		finalreport += Shared.al.getUnorderedItemList();
+		finalreport += Shared.resttables.getOccupiedTableRecords();
+		finalreport += Shared.resttables.getReportOfTableWithHighestBill();
+		finalreport += Shared.resttables.getReportOfTableWithMostOrders();
 
 		io.writeToFile(finalreport, false);
 
@@ -79,14 +74,14 @@ public class Manager {
 			//will ask for the input three times
 			while (!ok && count <4) {
 				//Asking for input a competitor ID
-				ArrayList<Table> tblist = Global.resttables.getOccupiedTableList();
+				ArrayList<Table> tblist = Shared.resttables.getOccupiedTableList();
 				String tablelist = "";
 				for(Table tb : tblist){
 					tablelist +=  tb.getTableno()+"  ";
 				}
 				String id = JOptionPane.showInputDialog(null, "Enter Table No From The Following Occupied Tables To Check Details : \n"+tablelist);
 
-				Table tb = Global.resttables.getTable(Integer.parseInt(id));
+				Table tb = Shared.resttables.getTable(Integer.parseInt(id));
 
 
 				if (tb!=null) {

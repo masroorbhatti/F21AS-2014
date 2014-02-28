@@ -1,5 +1,7 @@
 package pl;
 
+import global.Shared;
+
 public class Order implements Comparable<Order> {
 
 	private int ordernumber;
@@ -13,9 +15,9 @@ public class Order implements Comparable<Order> {
 	 */	
 	public Order(Table table, Item item, int qty){
 		if(table == null || item == null || qty == 0){
-			throw new IllegalArgumentException("Paramerters cannot be null in class Order");
+			throw new IllegalStateException("Paramerters cannot be null in class Order");
 		}
-		setOrdernumber(Global.getNewOrderNo());
+		setOrdernumber(Shared.getNewOrderNo());
 		setTable(table); 
 		setItem(item);
 		setQty(qty);
@@ -127,7 +129,11 @@ public class Order implements Comparable<Order> {
 	 */
 	public double getOrderDiscount(){
 		double ordprice = getOrderPrice();
-		double orddiscount = ordprice * Global.discountlistgl.get(this.item.getCategory()) / 100;
+		
+		double orddiscount =  0;
+		if (Shared.discountlistgl.get(this.item.getCategory()) != null){
+			orddiscount = ordprice * Shared.discountlistgl.get(this.item.getCategory()) / 100;
+		}
 		return orddiscount;	
 		}
 

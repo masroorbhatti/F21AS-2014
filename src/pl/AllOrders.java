@@ -1,18 +1,11 @@
 package pl;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 import java.util.TreeMap;
 public class AllOrders {
 	private TreeMap<Integer ,Order> allorders;		// TreeMap For storing All Orders
-	private HashSet<String> maxItems;		
-	private TreeMap<String ,Integer> maxorders;
 	private Iterator<Integer> ordersIterator;				// Iterator to iterate  
 	/***
 	 * Constructor
@@ -85,58 +78,9 @@ public class AllOrders {
 
 	}
 	
-	/*
-	public String getMaxOrderedItem(){
-
-
-
-
-
-
-		maxorders = new TreeMap<String,Integer>();
-
-		int repeat = 0;
-		String report="";
-		report +=("===========_Max Ordered Item_==========\n\n");
-		maxItems = new HashSet<String>();
-		for(Order or : Global.orderlistgl){	
-			for(Item it : Global.itemlistgl){
-				if(or.getItem().getItemName().equals(it.getItemName())){
-					for(String s : maxorders.keySet()){
-						if(it.getItemName() == s){
-							int currentcount = maxorders.get(it.getItemName());
-							int newcount = currentcount + 1;
-							maxorders.put(it.getItemName(), newcount);
-							repeat = 1;
-						}
-					}
-					if(repeat == 0){
-						maxorders.put(it.getItemName(), 1);
-
-					}
-					else
-						repeat = 0;
-
-				}
-			}
-		}
-		report += "Item Name                   Order Count\n";
-		report += "---------                   -----------\n\n";
-		for (Entry<String, Integer> entry : maxorders.entrySet()) {
-			 report += String.format("%-33s",entry.getKey());
-			 report += String.format("%-15s",entry.getValue());
-		     report += "\n";
-		}
-		report +=("\n================_END_==================\n\n\n\n");
-
-		return report;
-	}
-	
-	*/
 	public String getCostOfOrderForEachTable(int tbno){
 		String report="";
 		int count=0;
-		double totalbill = 0.0;
 		ordersIterator = allorders.keySet().iterator();
 		while (ordersIterator.hasNext()){
 			Integer orderno = ordersIterator.next();
@@ -149,7 +93,6 @@ public class AllOrders {
 			report += String.format("%20s",allorders.get(orderno).getItem().getItemName()+"");
 			report += String.format("%20s",allorders.get(orderno).getQty()+ "  *   " + allorders.get(orderno).getItem().getPrice() +"  =  ");
 			report += String.format("%20s",allorders.get(orderno).getOrderPrice());
-			totalbill += allorders.get(orderno).getOrderPrice();
 			report += ("\n");
 			}
 		}
